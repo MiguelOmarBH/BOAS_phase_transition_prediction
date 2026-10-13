@@ -1,7 +1,5 @@
 # BOAS Sleep Transition Predictor
 
-Physiological dynamics for the difficult moments in wearable sleep staging.
-
 Sleep-stage classifiers can perform well across a full night while struggling at the moment a person moves from one stage to another. The aim of this project is to understand those boundaries and test whether EEG, pulse and movement dynamics can help correct the predictions made around them.
 
 The proposed correction increases accuracy at the exact human-labelled boundary from 53.66% to 61.18%. Whole-night accuracy has a similar point estimate: 86.72% for Bitbrain and 86.85% after correction. There is a trade-off: accuracy decreases slightly outside those boundaries. The analysis makes that cost explicit rather than treating the global score as the whole result.
