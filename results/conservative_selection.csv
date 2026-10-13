@@ -1,0 +1,11 @@
+model,fold,threshold,policy
+current_past_conservative,0,0.7000000000000001,Post-hoc; selection on inner folds only
+current_past_conservative,1,0.55,Post-hoc; selection on inner folds only
+current_past_conservative,2,0.8,Post-hoc; selection on inner folds only
+current_past_conservative,3,0.65,Post-hoc; selection on inner folds only
+current_past_conservative,4,inf,Post-hoc; selection on inner folds only
+offline_conservative,0,0.65,Post-hoc; selection on inner folds only
+offline_conservative,1,0.45,Post-hoc; selection on inner folds only
+offline_conservative,2,0.55,Post-hoc; selection on inner folds only
+offline_conservative,3,0.55,Post-hoc; selection on inner folds only
+offline_conservative,4,inf,Post-hoc; selection on inner folds only

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite the BOAS dataset and the primary studies as well as this independent analysis."
+title: "BOAS Sleep Transition Predictor"
+type: software
+authors:
+  - family-names: "Belhouk Herrero"
+    given-names: "Miguel Omar"
+date-released: 2026-10-13
+license: MIT
+repository-code: "https://github.com/MiguelOmarBH/BOAS_phase_transition_prediction"

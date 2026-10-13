@@ -1,0 +1,17 @@
+{
+  "dataset": "Bitbrain Open Access Sleep (BOAS)",
+  "dataset_snapshot": "NEMAR on005555/v1.0.0",
+  "license": "CC0-1.0",
+  "doi": "10.82901/nemar.on005555",
+  "upstream": "https://github.com/OpenNeuroDatasets/ds005555",
+  "analysis_date": "2026-10-13",
+  "recordings": 128,
+  "unique_participants": 100,
+  "aligned_epochs": 120095,
+  "paired_staging_epochs": 114611,
+  "human_boundaries": 9737,
+  "raw_sha256_verified": true,
+  "raw_bytes": 13440299008,
+  "ppg_recordings": 112,
+  "imu_recordings": 94
+}

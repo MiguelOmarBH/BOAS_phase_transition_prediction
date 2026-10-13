@@ -1,0 +1,6 @@
+population,epochs
+Raw aligned epochs,120095
+Human valid stages,119759
+Both stage labels valid,114890
+Frozen paired model population,114611
+Bitbrain missing/artifact labels,4881
