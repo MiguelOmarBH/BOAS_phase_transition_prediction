@@ -1,4 +1,4 @@
-"""Build the portable exploration notebook; optionally execute it."""
+"""Build the portable exploration notebook with optional execution."""
 
 import argparse
 import base64
@@ -51,7 +51,7 @@ def execute_locally(notebook) -> None:
         cell.execution_count = count
         plt.close("all")
     notebook.metadata["execution_method"] = (
-        "Sequential Python/IPython; native Jupyter kernel unavailable during preparation"
+        "Sequential Python/IPython. Native Jupyter kernel unavailable during preparation"
     )
 
 
@@ -75,7 +75,7 @@ def main() -> None:
         ),
         md(
             '## Load the included evidence\n\nRun `python -m pip install -e ".[notebook]"` from the repository root. '
-            "The default exploration uses compact included predictions; no EDF download is required."
+            "The default exploration uses compact included predictions. No EDF download is required."
         ),
         code(
             "from pathlib import Path\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n"
@@ -104,7 +104,7 @@ def main() -> None:
             "    ax.plot(range(11), values, 'o-', color=color, label=label)\n"
             "ax.set_xticks(range(11), [*map(str,range(10)), '10+'])\n"
             "ax.set(xlabel='Distance to human boundary (30-second epochs)', ylabel='Stage accuracy (%)', ylim=(40,100))\n"
-            "ax.legend(frameon=False); plt.show()"
+            "ax.legend(frameon=False)\nplt.show()"
         ),
         md(
             "## Compare benefit and cost\n\nExact boundaries and the remaining epochs partition the paired population. "
@@ -134,7 +134,7 @@ def main() -> None:
         ),
         md(
             "## Inspect a particular transition\n\nChange `MINIMUM_EPOCHS` to include sparse cases. "
-            "These subgroup results are descriptive; small counts should not be interpreted as stable estimates."
+            "These subgroup results are descriptive. Small counts should not be interpreted as stable estimates."
         ),
         code(
             "MINIMUM_EPOCHS = 200\n"
@@ -145,7 +145,7 @@ def main() -> None:
         ),
         md(
             "## Examine antecedent physiology\n\nChange the transition and feature. Measurements are compared with stable controls of the same origin stage and night. "
-            "The plotted time is the **end** of the measurement window: −30 s means a 30-second gap before the labelled boundary. "
+            "The plotted time is the end of the measurement window: −30 s means a 30-second gap before the labelled boundary. "
             "Whole-night standardisation is descriptive and is not used by the classifier."
         ),
         code(
@@ -157,7 +157,7 @@ def main() -> None:
             "fig, ax = plt.subplots(figsize=(8,4), constrained_layout=True)\n"
             "ax.errorbar(-effect.lead_seconds, effect.effect_sd, yerr=[effect.effect_sd-effect.ci_low, effect.ci_high-effect.effect_sd], fmt='o-', capsize=4, color=PROPOSED)\n"
             "ax.axhline(0,color='gray',linewidth=1)\n"
-            "ax.set(title=TRANSITION+' · '+FEATURE, xlabel='Measurement window ends before boundary (s)', ylabel='Difference from stable controls (SD)')\n"
+            "ax.set(title=TRANSITION+'\\n'+FEATURE, xlabel='Measurement window ends before boundary (s)', ylabel='Difference from stable controls (SD)')\n"
             "plt.show()"
         ),
         md(
@@ -175,7 +175,7 @@ def main() -> None:
             "    ax.plot(recall,precision,color=color,label=name)\n"
             "ax.axhline(forecast.future_boundary_30s.mean(),color='gray',linestyle='--',label='Event prevalence')\n"
             "ax.set(xlabel='Recall',ylabel='Precision',xlim=(0,1),ylim=(0,1))\n"
-            "ax.legend(frameon=False); plt.show()"
+            "ax.legend(frameon=False)\nplt.show()"
         ),
         md(
             "## Optional per-night signal features\n\nAfter extraction, select a night and time range. "
@@ -189,15 +189,17 @@ def main() -> None:
             "    night = features.loc[features.participant_id.eq(NIGHT) & features.onset.between(START_MINUTE*60,END_MINUTE*60)]\n"
             "    fig, axes = plt.subplots(2,1,figsize=(9,5),sharex=True,constrained_layout=True)\n"
             "    axes[0].plot(night.onset/60,night.eeg_log_delta_sigma_mean,color=PROPOSED,label='log(delta/sigma)')\n"
-            "    axes[0].plot(night.onset/60,night.eeg_log_alpha_theta_mean,color=BASELINE,label='log(alpha/theta)'); axes[0].legend()\n"
-            "    axes[1].plot(night.onset/60,night.ppg_hr,color=BASELINE); axes[1].set(xlabel='Minutes since recording start',ylabel='Pulse rate (beats/min)')\n"
+            "    axes[0].plot(night.onset/60,night.eeg_log_alpha_theta_mean,color=BASELINE,label='log(alpha/theta)')\n"
+            "    axes[0].legend()\n"
+            "    axes[1].plot(night.onset/60,night.ppg_hr,color=BASELINE)\n"
+            "    axes[1].set(xlabel='Minutes since recording start',ylabel='Pulse rate (beats/min)')\n"
             "    plt.show()\n"
             "else:\n    print('Run download_data.py and extract_features.py to enable per-night signal exploration.')"
         ),
         md(
             "## Interpretation\n\nThe primary gain is concentrated at human-labelled boundaries. The global point estimate remains close to Bitbrain, "
             "but stable and remaining-epoch costs and the global interval prevent a claim of validated product superiority. "
-            "BOAS is a development dataset; the combined system needs external evaluation with a frozen upstream classifier. "
+            "BOAS is a development dataset. The combined system needs external evaluation with a frozen upstream classifier. "
             "Morphology and autonomic features are predictive candidates rather than validated physiological biomarkers.\n\n"
             "The [methods](../docs/methods.md), [evidence](../docs/evidence.md) and [reproducibility guide](../docs/reproducibility.md) describe the assumptions and code."
         ),

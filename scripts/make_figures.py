@@ -39,8 +39,8 @@ def style() -> None:
 
 
 def heading(fig: plt.Figure, title: str, note: str) -> None:
-    fig.text(0.09, 0.96, "BOAS  /  SLEEP TRANSITIONS", fontsize=10, color=MUTED, weight="bold")
-    fig.text(0.09, 0.90, title, fontsize=20, weight="bold", color=INK)
+    fig.text(0.09, 0.96, "BOAS  /  SLEEP TRANSITIONS", fontsize=10, color=MUTED, weight="normal")
+    fig.text(0.09, 0.90, title, fontsize=20, weight="normal", color=INK)
     fig.text(0.09, 0.025, note, fontsize=9, color=MUTED, va="bottom")
 
 
@@ -118,7 +118,7 @@ def main() -> None:
     heading(
         fig,
         "The difficult part of the night is the boundary",
-        "Matched population: 114,611 epochs from 100 people. Distance is unsigned; 10+ means at least five minutes.\n"
+        "Matched population: 114,611 epochs from 100 people. Distance is unsigned. The 10+ bin means at least five minutes.\n"
         "Each point is a separate distance bin. Epochs with unknown boundary distance are omitted from the curves.",
     )
     save(fig, "boundary_accuracy")
@@ -169,7 +169,7 @@ def main() -> None:
             f"{b - a:+.2f} pp",
             ha="left",
             va="center",
-            weight="bold",
+            weight="normal",
             color=INK,
             clip_on=False,
         )
@@ -186,13 +186,13 @@ def main() -> None:
     ax.scatter(proposed, y, s=65, color=PROPOSED, zorder=4, label="Proposed correction")
     ax.set_yticks(y, categories)
     ax.invert_yaxis()
-    ax.set(xlim=(40, 100), ylim=(4.7, -0.7), xlabel="Accuracy (%) · axis shown from 40 to 100")
+    ax.set(xlim=(40, 100), ylim=(4.7, -0.7), xlabel="Accuracy (%) on a scale from 40 to 100")
     ax.grid(axis="x", color="#E2E4DE", linewidth=0.7)
     ax.legend(loc="upper left", bbox_to_anchor=(-0.01, 1.19), ncol=2, frameon=False)
     heading(
         fig,
         "A boundary gain, with similar overall point estimates",
-        "The proposed model uses one following epoch. Remaining epochs exclude exact boundaries; stable means distance ≥ five minutes.\n"
+        "The proposed model uses one following epoch. Remaining epochs exclude exact boundaries. Stable means distance ≥ five minutes.\n"
         "Groups overlap and are not additive. Similar point estimates do not demonstrate statistical noninferiority.",
     )
     save(fig, "accuracy_comparison")
@@ -226,12 +226,12 @@ def main() -> None:
     )
     ax.grid(axis="x", color="#E2E4DE", linewidth=0.7)
     for i, value in enumerate(estimate):
-        ax.text(value, i - 0.22, f"{value:+.2f}", ha="center", fontsize=10, weight="bold")
+        ax.text(value, i - 0.22, f"{value:+.2f}", ha="center", fontsize=10, weight="normal")
     heading(
         fig,
         "The gain is localized, and so is the cost",
         "Paired 95% intervals from 2,000 resamples of complete participants. Positive values favour the proposed correction.\n"
-        "Whole-night uncertainty spans zero; the higher stable-period error remains visible.",
+        "Whole-night uncertainty spans zero. The higher stable-period error remains visible.",
     )
     save(fig, "paired_differences")
 
@@ -285,7 +285,7 @@ def main() -> None:
         fig,
         "The result depends on the direction of the transition",
         "All transition types with at least 200 paired epochs, ordered by observed accuracy difference.\n"
-        "These are descriptive subgroup estimates; sparse transitions remain in the complete CSV table.",
+        "These are descriptive subgroup estimates. Sparse transitions remain in the complete CSV table.",
     )
     save(fig, "directed_transitions")
 
@@ -317,7 +317,7 @@ def main() -> None:
     heading(
         fig,
         "Antecedents include physiology and signal quality",
-        "Controls share the origin stage and night. Each person has equal weight; intervals are descriptive and unadjusted for multiple comparisons.\n"
+        "Controls share the origin stage and night. Each person has equal weight. Intervals are descriptive and unadjusted for multiple comparisons.\n"
         "Whole-night scaling is used only for this effect-size analysis. Morphology candidates are not clinically validated events.",
     )
     save(fig, "physiological_antecedents")
@@ -344,14 +344,14 @@ def main() -> None:
             precision[indices],
             color=colors[name],
             linewidth=2,
-            label=f"{labels[name]} · AUROC {fm.loc[name, 'auroc']:.3f}, AP {fm.loc[name, 'average_precision']:.3f}",
+            label=f"{labels[name]} (AUROC {fm.loc[name, 'auroc']:.3f}, AP {fm.loc[name, 'average_precision']:.3f})",
         )
     ax.axhline(
         fm.prevalence.iloc[0],
         color=MUTED,
         linestyle=(0, (3, 3)),
         linewidth=1,
-        label="Event prevalence · 8.55%",
+        label="Event prevalence: 8.55%",
     )
     ax.set(
         xlim=(0, 1),
@@ -364,7 +364,7 @@ def main() -> None:
     heading(
         fig,
         "The signals carry information before the labelled boundary",
-        "114,476 held-out epochs. Measurements end 30 seconds before the target boundary; labels have 30-second resolution.\n"
+        "114,476 held-out epochs. Measurements end 30 seconds before the target boundary. Labels have 30-second resolution.\n"
         "The signals-only model receives no Bitbrain stages. Published Bitbrain context may itself include future information.",
     )
     save(fig, "boundary_forecast")
