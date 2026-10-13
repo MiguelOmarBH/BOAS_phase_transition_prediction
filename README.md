@@ -22,6 +22,8 @@ The question is therefore specific: can we improve classification at human-defin
 
 ![Accuracy by distance to a human-labelled boundary](docs/figures/boundary_accuracy.svg)
 
+*Figure 1. Classification accuracy of Bitbrain and the proposed correction model as a function of distance to the nearest human-labelled sleep-stage transition. Both models achieve higher accuracy during stable sleep periods, with the lowest accuracy at transition boundaries. At these boundaries, the proposed correction improves accuracy by 7.52 percentage points, corresponding to a 16.2% relative reduction in boundary error.*
+
 ## 3. Literature as a starting hypothesis
 
 The review suggested looking at trajectories and short events, rather than relying only on average EEG power over an entire epoch.
