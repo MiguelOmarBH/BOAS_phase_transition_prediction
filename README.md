@@ -72,15 +72,20 @@ All staging comparisons use the same 114,611 paired epochs from 100 people.
 | Remaining epochs, excluding exact boundaries | 89.79% | 89.23% | −0.56 pp |
 | Stable periods, at least five minutes away | 95.93% | 95.02% | −0.91 pp |
 
+*Table 1. Performace from Bitbrain's model compared with the proposed correction model.*
+
 Regions overlap and are not additive. The difference in the near-boundary row is calculated before rounding the two accuracies.
 
 ![Bitbrain and proposed accuracy across evaluation regions](docs/figures/accuracy_comparison.svg)
+
+*Figure 2. Classification accuracie across evaluation regions.*
 
 The boundary gain corresponds to a 16.2% relative reduction in boundary error. Its paired 95% participant-bootstrap interval is +6.53 to +8.51 accuracy points. The model changes 4.93% of labels and increases macro-F1 from 0.719 to 0.744.
 
 There are 732 additional correctly classified boundary epochs, partly offset by 586 fewer correct labels outside the exact boundaries. The net result is 146 additional correct epochs across the whole matched population. This explains why the boundary improvement is substantial while the global point estimate changes very little.
 
 ![Paired accuracy differences and participant-bootstrap intervals](docs/figures/paired_differences.svg)
+*Figure 3. Paired differences in classification accuracy between the proposed correction model and Bitbrain across sleep-period subsets. Points show accuracy differences in percentage points, with 95% confidence intervals obtained from 2,000 participant-level bootstrap resamples. Positive values favour the proposed correction. Gains are greatest at human-labelled transition boundaries, while accuracy decreases slightly during stable periods. The whole-night confidence interval includes zero.*
 
 The whole-night difference has a 95% interval of −0.43 to +0.58 points. Similar point estimates therefore do not establish statistical noninferiority. A more conservative correction policy reduces the stable-period cost but also reduces boundary accuracy to 57.78%. It is a secondary, post-hoc sensitivity analysis.
 
@@ -88,15 +93,21 @@ Performance also depends on direction. Wake→N1, N2→N3 and several transition
 
 ![Accuracy across transition directions](docs/figures/directed_transitions.svg)
 
+*Figure 4. Classification accuracy of Bitbrain and the proposed correction model, grouped by transition direction. Each arrow indicates the change from the preceding stage to the newly labelled stage. Only transition types with at least 200 paired boundary epochs are shown, ordered by the observed accuracy difference between models. Sample sizes are displayed on the right.*
+
 ### Antecedent physiology and prediction
 
 Before N2→N3, slow-wave candidates and delta/sigma increase. Before N2→REM, theta increases while delta decreases. Pulse-quality deterioration and movement also precede some boundaries, which means predictive information can contain both physiological activation and sensor contamination.
 
 ![Antecedent signals and signal quality](docs/figures/physiological_antecedents.svg)
 
+*Figure 5. Selected signal changes preceding human-labelled sleep-stage transitions. Panels show candidate slow-wave counts before N2→N3, relative theta power before N2→REM, and pulse-interval outliers across all transitions. Values represent standardised differences from stable epochs matched by origin stage and night, with equal participant weighting. Negative times indicate measurement windows ending before the boundary. Error bars show descriptive confidence intervals without adjustment for multiple comparisons. These exploratory markers may reflect both physiology and signal quality.*
+
 In the separate 30-second-ahead experiment, adding signals improves AUROC from 0.664 for context alone to 0.741. The signals-only model reaches 0.727, with average precision 0.230 against an event prevalence of 8.55%. It receives no Bitbrain stages. These metrics describe forecasting, not five-class stage accuracy.
 
 ![Precision-recall curves for future human-labelled boundaries](docs/figures/boundary_forecast.svg)
+
+*Figure 6. Precision–recall curves for predicting future human-labelled sleep-stage transitions using Bitbrain-derived context, signal features, or their combination. Performance is evaluated on 114,476 held-out epochs, with signal measurements ending 30 seconds before the target boundary. The horizontal reference indicates the boundary prevalence of 8.55%. The signals-only model receives no Bitbrain stage labels. Models using Bitbrain-derived context may contain future information from the upstream classifier.*
 
 ## Conclusions and scope
 
